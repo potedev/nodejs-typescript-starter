@@ -3,8 +3,10 @@ require('dotenv').config()
 //NODE_ENV = production
 //NODE_ENV = development
 
+type nodeEnvType = 'development' | 'production';
+
 //General
-export const NODE_ENV = process.env.NODE_ENV || 'development';
+export const NODE_ENV = (process.env.NODE_ENV as nodeEnvType) || 'development';
 export const __prod__ = NODE_ENV === 'production';
 
 //API

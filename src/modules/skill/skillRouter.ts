@@ -2,9 +2,7 @@ import { Router } from 'express'
 
 const skillRouter: Router = Router();
 
-console.log('User router');
-
-skillRouter.get('/', (req, res) => {
+skillRouter.get('/', (_, res) => {
     res.json('Skills');
 })
 

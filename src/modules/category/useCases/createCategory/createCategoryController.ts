@@ -39,6 +39,6 @@ export class CreateCategoryController {
         const categories = await this.useCase.execute({ name, description });
         console.log('Controller categories result', categories);
 
-        res.status(200).json(categories);
+        return res.status(200).json(categories);
     }
 }

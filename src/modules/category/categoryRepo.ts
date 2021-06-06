@@ -18,4 +18,10 @@ export class CategoryRepo {
 
         return await CategoryEntity.create({ name: categoryProps.name, description: categoryProps.description }).save()
     }
+
+    public async getCategoryById(categoryId: number) {
+        const CategoryEntity = this.entities.Category
+
+        return await CategoryEntity.findOne(categoryId)
+    }
 }

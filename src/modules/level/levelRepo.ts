@@ -13,4 +13,10 @@ export class LevelRepo {
 
         return await LevelEntity.create({ number: levelProps.number, name: levelProps.name }).save()
     }
+
+    public async getLevelById(levelId: number) {
+        const LevelEntity = this.entities.Level
+
+        return await LevelEntity.findOne(levelId)
+    }
 }

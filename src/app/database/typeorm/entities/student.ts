@@ -2,17 +2,17 @@ import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "t
 import { Progress } from './progress'
 
 @Entity()
-export class Level extends BaseEntity {
+export class Student extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
-    number: number;
+    firstname: string;
 
     @Column()
-    name: string;
+    lastname: string;
 
-    @OneToMany(() => Progress, progress => progress.level)
+    @OneToMany(() => Progress, progress => progress.student)
     progresses: Progress[]
 }

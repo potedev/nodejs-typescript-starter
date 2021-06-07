@@ -13,4 +13,10 @@ export class SkillRepo {
 
         return await skillEntity.create({ name: skillProps.name, category: skillProps.category }).save()
     }
+
+    public async getSkillById(skillId: number) {
+        const skillEntity = this.entities.Skill
+
+        return await skillEntity.findOne(skillId)
+    }
 }

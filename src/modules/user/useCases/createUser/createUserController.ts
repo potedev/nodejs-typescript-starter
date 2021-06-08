@@ -1,6 +1,7 @@
 import { CreateUser } from './createUser'
 import { Request, Response } from 'express'
 import { validate } from 'class-validator'
+import { parseError } from '../../../../utils/parseClassValidatorError'
 
 //DTO
 import { RequestCreateUserDto } from './createUserDto'
@@ -21,18 +22,12 @@ export class CreateUserController {
         // }
 
         const requestUserDto = new RequestCreateUserDto(req.body);
-        const errors = await validate(requestUserDto);
+        const dtoErrors = await requestUserDto.isValid(requestUserDto)
 
+        if (!!dtoErrors) {
+            return res.status(400).json(dtoErrors);
+        }
 
-        console.log('Request DTO create user errors : ', errors);
-
-
-        // const dtoErrors = await requestUserDto.isValid(requestUserDto)
-
-        // if (!!dtoErrors) {
-        //     return res.status(400).json(dtoErrors);
-        // }
-
-        // this.useCase.execute(req.body);
+        this.useCase.execute(req.body);
     }
 }

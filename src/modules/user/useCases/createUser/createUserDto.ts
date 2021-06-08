@@ -1,5 +1,4 @@
 import { MinLength, MaxLength, IsString, IsDefined, IsEmail, IsOptional, validate } from 'class-validator'
-import { parseError } from '../../../../utils/parseClassValidatorError'
 import { AbstractDto } from '../../../../common/abstractDto'
 
 export interface IRequestCreateUserDto {
@@ -21,7 +20,7 @@ export class RequestCreateUserDto extends AbstractDto implements IRequestCreateU
     @MaxLength(15, {
         message: 'Password is too long',
     })
-    @IsString({message:"T'es nul"})
+    @IsString()
     public password: string
 
     constructor(props: IRequestCreateUserDto) {

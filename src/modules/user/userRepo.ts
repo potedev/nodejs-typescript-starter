@@ -8,9 +8,6 @@ export class UserRepo {
     }
 
     public async create(userProps: createUserProps) {
-
-
-        console.log('repo user props', userProps);
         const UserEntity = this.entities.User
 
         return await UserEntity.create(userProps).save()

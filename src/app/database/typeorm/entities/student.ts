@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany, OneToOne, JoinColumn } from "typeorm";
 import { Progress } from './progress'
+import { User } from './user'
 
 @Entity()
 export class Student extends BaseEntity {
@@ -12,6 +13,10 @@ export class Student extends BaseEntity {
 
     @Column()
     lastname: string;
+
+    @OneToOne(() => User)
+    @JoinColumn()
+    user: User;
 
     @OneToMany(() => Progress, progress => progress.student)
     progresses: Progress[]

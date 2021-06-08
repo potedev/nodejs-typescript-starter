@@ -1,5 +1,6 @@
 import { CreateUser } from './createUser'
 import { Request, Response } from 'express'
+import { validate } from 'class-validator'
 
 //DTO
 import { RequestCreateUserDto } from './createUserDto'
@@ -14,13 +15,24 @@ export class CreateUserController {
 
     public async execute(req: Request, res: Response) {
 
+        // body {
+        //     email:"qsdqsd@qsdqs.com"
+        //     password:"*******"
+        // }
+
         const requestUserDto = new RequestCreateUserDto(req.body);
-        const dtoErrors = await requestUserDto.isValid(requestUserDto)
+        const errors = await validate(requestUserDto);
 
-        if (!!dtoErrors) {
-            return res.status(400).json(dtoErrors);
-        }
 
-        this.useCase.execute(req.body);
+        console.log('Request DTO create user errors : ', errors);
+
+
+        // const dtoErrors = await requestUserDto.isValid(requestUserDto)
+
+        // if (!!dtoErrors) {
+        //     return res.status(400).json(dtoErrors);
+        // }
+
+        // this.useCase.execute(req.body);
     }
 }

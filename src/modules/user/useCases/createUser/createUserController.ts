@@ -26,13 +26,26 @@ export class CreateUserController {
 
         console.log('Request DTO create user errors : ', errors);
 
+        const dtoErrors = await requestUserDto.isValid(requestUserDto)
 
-        // const dtoErrors = await requestUserDto.isValid(requestUserDto)
+        if (!!dtoErrors) {
+            return res.status(400).json(dtoErrors);
+        }
 
-        // if (!!dtoErrors) {
-        //     return res.status(400).json(dtoErrors);
-        // }
+        try {
+            const result = await this.useCase.execute(req.body);
 
-        // this.useCase.execute(req.body);
+            if (!result.success) {
+                return res.status(400).json(result.message)
+            }
+
+            console.log('result', result);
+
+            return res.status(201).json();
+        }
+        catch (err) {
+            console.log('create controllers errors :', err);
+        }
+
     }
 }

@@ -24,11 +24,13 @@ export class CreateUser {
             const hashPassword = await argon2.hash(props.password);
             console.log('hashed password', hashPassword);
 
-            const user = await this.userRepo.create(props);
-            console.log('user', user);
+            props.password = hashPassword;
+
+            await this.userRepo.create(props);
 
             return {
-                success: true
+                success: true,
+                message: 'User is correctly created'
             }
         }
         catch (err) {
@@ -37,7 +39,5 @@ export class CreateUser {
                 message: err
             }
         }
-
-
     }
 }

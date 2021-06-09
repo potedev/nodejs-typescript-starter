@@ -1,4 +1,5 @@
 import { createUserProps } from './userTypes'
+import { User } from '../../app/database/typeorm/entities/user'
 
 export class UserRepo {
     private entities: any
@@ -25,5 +26,13 @@ export class UserRepo {
         const result = await UserEntity.findOne({ email: email })
 
         return !!result === true;
+    }
+
+    public async getUserByEmail(email: string): Promise<User> {
+        const UserEntity = this.entities.User;
+
+        const result = await UserEntity.findOne({ email: email })
+
+        return result
     }
 }

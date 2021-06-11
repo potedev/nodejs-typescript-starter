@@ -39,7 +39,7 @@ export class LoginController {
             // );
 
 
-            return res.cookie("token", result.payload?.token, { maxAge: 900000 }).status(200).json(data)
+            return res.cookie("token", result.payload?.token, { maxAge: 900000, httpOnly: true }).status(200).json(data)
 
             // res.cookie(
             //     "refresh_token",
